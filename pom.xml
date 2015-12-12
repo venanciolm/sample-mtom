@@ -52,7 +52,7 @@
 		<servlet-api.VERSION>2.5</servlet-api.VERSION>
 	</properties>
 	<scm>
-		<tag>HEAD</tag>
+		<tag>development</tag>
 		<url>https://github.com/venanciolm/sample-mtom</url>
 		<connection>scm:git:${project.scm.url}.git</connection>
 		<developerConnection>scm:git:${project.scm.url}.git</developerConnection>
