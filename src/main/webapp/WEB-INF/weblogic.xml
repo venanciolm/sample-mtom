@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app xmlns="http://xmlns.oracle.com/weblogic/weblogic-web-app"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd http://xmlns.oracle.com/weblogic/weblogic-web-app http://xmlns.oracle.com/weblogic/weblogic-web-app/1.2/weblogic-web-app.xsd">
+	<context-root>sample-mtom</context-root>
+	<container-descriptor>
+		<prefer-application-packages>
+			<package-name>org.log4j.*</package-name>
+			<package-name>org.slf4j.*</package-name>
+			<package-name>com.sun.xml.ws.api.wsdl.parser.*</package-name>
+		</prefer-application-packages>
+		<prefer-application-resources>
+			<resource-name>org/slf4j/impl/StaticLoggerBinder.class</resource-name>
+			<!-- para que funcione en tomcat y en WLS 12c -->
+			<resource-name>META-INF/services/javax.xml.ws.*</resource-name>
+			<resource-name>META-INF/services/com.sun.xml.ws.*</resource-name>
+			<resource-name>META-INF/services/com.sun.tools.ws.*</resource-name>
+		</prefer-application-resources>
+		<show-archived-real-path-enabled>true</show-archived-real-path-enabled>
+		<optimistic-serialization>true</optimistic-serialization>
+	</container-descriptor>
+</weblogic-web-app>

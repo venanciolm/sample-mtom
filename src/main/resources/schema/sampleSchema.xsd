@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:schema elementFormDefault="qualified"
+	targetNamespace="http://samples.farmafene.com/sample-service/schema"
+	xmlns:tns="http://samples.farmafene.com/sample-service/schema" xmlns:s="http://www.w3.org/2001/XMLSchema"
+	xmlns:xmime="http://www.w3.org/2005/05/xmlmime">
+
+	<s:complexType name="MtomPart">
+		<s:annotation>
+			<s:documentation>Mtom part</s:documentation>
+		</s:annotation>
+		<s:sequence>
+			<s:element name="contentType" type="s:string" />
+			<s:element name="file" type="s:base64Binary"
+				xmime:expectedContentTypes="*/*" />
+		</s:sequence>
+	</s:complexType>
+	<s:element name="SampleRequest">
+		<s:annotation>
+			<s:documentation>Service request</s:documentation>
+		</s:annotation>
+		<s:complexType>
+			<s:sequence>
+				<s:element name="param" type="s:string" />
+				<s:element name="paramFile" type="tns:MtomPart" />
+			</s:sequence>
+		</s:complexType>
+	</s:element>
+	<s:element name="SampleResponse">
+		<s:annotation>
+			<s:documentation>Service response</s:documentation>
+		</s:annotation>
+		<s:complexType>
+			<s:sequence>
+				<s:element name="errorCode" type="s:int" />
+				<s:element name="errorDescription" type="s:string"
+					minOccurs="0" />
+				<s:element name="param" type="s:string" minOccurs="0" />
+				<s:element name="paramFileResponse" type="tns:MtomPart"
+					minOccurs="0" />
+			</s:sequence>
+		</s:complexType>
+	</s:element>
+</s:schema>

@@ -1,0 +1,50 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+						http://www.springframework.org/schema/util 
+						http://www.springframework.org/schema/util/spring-util-3.1.xsd 
+						http://www.springframework.org/schema/mvc 
+						http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd 
+						http://www.springframework.org/schema/jee 
+						http://www.springframework.org/schema/jee/spring-jee-3.2.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="es.xunta.amtega.verificacioncsv.service*" />
+	<context:property-placeholder
+		properties-ref="properties" order="1" ignore-unresolvable="true"
+		system-properties-mode="OVERRIDE" />
+	<context:property-placeholder
+		properties-ref="propertiesDefault" order="2" ignore-unresolvable="true" />
+	<bean id="propertiesDefault"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="WSJodWS.url" />
+				<prop key="WSJodWS.wsdl" />
+				<prop key="com.sun.xml.ws.transport.http.client.HttpTransportPipe.dump">true</prop>
+				<prop
+					key="com.sun.xml.internal.ws.transport.http.client.HttpTransportPipe.dump">true</prop>
+				<prop key="com.sun.xml.ws.transport.http.HttpAdapter.dump">true</prop>
+				<prop key="com.sun.xml.internal.ws.transport.http.HttpAdapter.dump">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.farmafene.samples.mtom.SampleService" />
+		<property name="endpointAddress" value="${WSJodWS.url}" />
+		<property name="wsdlDocumentUrl" value="${WSJodWS.wsdl}" />
+		<property name="namespaceUri" value="http://mtom.samples.farmafene.com/" />
+		<property name="serviceName" value="SampleService" />
+		<property name="portName" value="SampleServicePort" />
+		<property name="lookupServiceOnStartup" value="false" />
+		<property name="webServiceFeatures">
+			<bean class="javax.xml.ws.soap.MTOMFeature" />
+		</property>
+	</bean>
+</beans>
